@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/Contact.css';
 import Navbar from '../components/Navbar';
 import Footers from '../components/Footers';
@@ -24,11 +24,19 @@ export const Contact = () => {
     // Aquí puedes agregar la lógica para enviar el formulario.
   };
 
+  useEffect(() => {
+    document.body.classList.add("body-Contact");
+    return () => {
+      document.body.classList.remove("body-Contact");
+    };
+  }, []);
+
   return (
     <div>
       <Navbar />
+      <h1>Contact us</h1>
       <section className="contact-container">
-        <h1>Contact us</h1>
+        
         <form onSubmit={handleSubmit} className="contact-form">
           <div className="form-group">
             <label htmlFor="name">Name</label>

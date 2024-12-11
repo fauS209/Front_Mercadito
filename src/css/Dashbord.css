@@ -5,11 +5,23 @@ body {
   color: #333;
 }
 
+.body-Dashbord{
+  background-image: url(/public/images/pixelcut-export.jpeg);
+}
+
+.filter-form{
+  max-width: 250px;  /* Ancho máximo del formulario */
+  width: 100%;       /* Asegura que ocupe todo el ancho posible dentro de su contenedor */
+  margin: 20px auto; /* Centra el formulario y agrega espacio superior e inferior */
+  padding: 15px;     /* Espaciado interno */
+  background-color: #fff; /* Color de fondo blanco */
+  border-radius: 8px;  
+}
 /* Title */
 h1 {
   
   text-align: center;
- margin-top: -60px;
+  margin-top: -60px;
   font-size: 2rem;
   color: #333;
 }
@@ -110,10 +122,19 @@ h1 {
     width: 100%;
   }
 }
+@media (max-width: 1000px) {
+  .titleMercadito {
+    padding-top: 200px; /* Añadido para evitar que el contenido quede debajo del nav */
+  }
+
+}
 
 
+@media (max-width: 2000px) {
+  .titleMercadito {
+    padding-top: 200px; /* Añadido para evitar que el contenido quede debajo del nav */
+  }
 
-@media (max-width: 980px) {
 .footerDash{
   position: relative;
   bottom: 0;

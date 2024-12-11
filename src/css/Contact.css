@@ -1,4 +1,12 @@
 /* Contenedor del formulario de contacto */
+
+
+h1{
+  font-size: 45px;
+  color: #000000;
+  text-align: center;
+}
+
 .contact-container {
     width: 100%;
     max-width: 500px; /* Ajustado para un formulario más amplio */
@@ -9,7 +17,12 @@
     text-align: center;
     margin-top: 50px; /* Separación superior */
   }
-  
+  .body-Contact{
+    background-image: url(/public/images/verduras.jpg);
+  }
+
+
+
   /* Título */
   .contact-container h1 {
     font-size: 32px; /* Título más grande */

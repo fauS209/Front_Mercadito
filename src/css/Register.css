@@ -5,7 +5,12 @@
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #f9f9f9;
+    
   }
+
+ .register-page{
+  background-image: url(/public/images/2.png);
+ }
   
   .header {
     text-align: center;

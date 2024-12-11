@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../css/Login.css";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Footers from "../components/Footers";
+
 export const Login = () => {
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
-const [errorMessage, setErrorMessage] = useState(""); // Para manejar errores
-const navigate = useNavigate(); // Hook para redirigir
+const [errorMessage, setErrorMessage] = useState("");
+const navigate = useNavigate();
+
+useEffect(() => {
+    document.body.classList.add("body-login");
+    return () => {
+    document.body.classList.remove("body-login");
+    };
+}, []);
 
 async function login(event) {
     event.preventDefault();
@@ -17,38 +25,32 @@ async function login(event) {
     const res = await axios.post("http://localhost:8080/api/v1/mercadito/users/login", {
         email: email,
         password: password,
-        });
+    });
 
-    
-        const { status, userId } = res.data;
+    const { status, userId } = res.data;
 
-        if (status === true) {
-            localStorage.setItem("userId", userId);
-            localStorage.setItem("isLoggedIn", "true"); // Guardamos el estado de autenticación
-            navigate("/Dashbord");
-        } else {
-            setErrorMessage("Credenciales incorrectas. Por favor, intenta de nuevo.");
-        
+    if (status === true) {
+        localStorage.setItem("userId", userId);
+        localStorage.setItem("isLoggedIn", "true");
+        navigate("/Dashbord");
+    } else {
+        setErrorMessage("Credenciales incorrectas. Por favor, intenta de nuevo.");
     }
     } catch (error) {
-        setErrorMessage("Ocurrió un error al iniciar sesión. Verifica tu conexión.");
-        console.error(error);
+    setErrorMessage("Ocurrió un error al iniciar sesión. Verifica tu conexión.");
+    console.error(error);
     }
 }
 
-    return (
+return (
     <div className="container">
     <Navbar />
     <h2 className="header">Login</h2>
     <form className="form" onSubmit={login}>
-    
         <div className="input-group">
-        <label htmlFor="email" className="label" >
-            Email
-        </label>
+        <label htmlFor="email" className="label">Email</label>
         <input
             type="email"
-
             required
             className="input"
             placeholder="Email"
@@ -58,9 +60,7 @@ async function login(event) {
         </div>
 
         <div className="input-group">
-        <label htmlFor="password" className="label">
-            Password
-        </label>
+        <label htmlFor="password" className="label">Password</label>
         <input
             type="password"
             id="password"
@@ -79,8 +79,9 @@ async function login(event) {
         Sign in
         </button>
     </form>
-    <Footers/>
+    <Footers />
     </div>
 );
 };
+
 export default Login;

@@ -11,6 +11,10 @@ body {
   font-family: Arial, sans-serif; /* Fuente más moderna */
 }
 
+.body-login{
+  background-image: url(/public/images/2.png);
+}
+
 /* Contenedor del formulario */
 .container {
   width: 100%;

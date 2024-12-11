@@ -18,9 +18,19 @@ const CreatePost = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Agregar clase al body cuando el componente se monta
+    document.body.classList.add("body-CreatePost");
+
+    // Limpiar clase cuando el componente se desmonta
+    return () => {
+      document.body.classList.remove("body-CreatePost");
+    };
+  }, []);
+
+  useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
     const isLoggedIn = localStorage.getItem("isLoggedIn");
-    
+
     if (!storedUserId || isLoggedIn !== "true") {
       navigate("/Error"); // Redirige si no está autenticado
     } else {
@@ -58,10 +68,7 @@ const CreatePost = () => {
     try {
       const data = new FormData();
       data.append("file", file);
-      data.append(
-        "postDto",
-        JSON.stringify({ ...formData, userId })
-      );
+      data.append("postDto", JSON.stringify({ ...formData, userId }));
 
       const response = await axios.post(
         "http://localhost:8080/api/v1/mercadito/posts/create",
@@ -83,52 +90,61 @@ const CreatePost = () => {
   };
 
   return (
-    <div>
+    <div className="create-post-page">
       <Navbar />
-      <form onSubmit={handleSubmit}>
-        <h2 type="text">Sell a product</h2>
-        <div>
-          <label>Title</label>
-          <input
-            type="text"
-            name="title"
-            placeholder="Item name"
-            value={formData.title}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Description</label>
-          <textarea
-            name="description"
-            type="text"
-            placeholder="Describe your item"
-            value={formData.description}
-            onChange={handleInputChange}
-            required
-          ></textarea>
-        </div>
-        <div>
-          <label>Telephone Number</label>
-          <input
-            type="text"
-            placeholder="Phone number"
-            name="telNumber"
-            value={formData.telNumber}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div>
-          <label>File</label>
-          <input type="file" onChange={handleFileChange} required />
-        </div>
-        <button type="submit">Create Post</button>
-      </form>
+      <h2 className="create-post-title">Sell a product</h2>
+      <div className="create-post-container">
+        <form onSubmit={handleSubmit} className="create-post-form">
+          <div className="form-group">
+            <label htmlFor="title">Title</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              placeholder="Item name"
+              value={formData.title}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="description">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              placeholder="Describe your item"
+              value={formData.description}
+              onChange={handleInputChange}
+              required
+            ></textarea>
+          </div>
+          <div className="form-group">
+            <label htmlFor="telNumber">Telephone Number</label>
+            <input
+              type="text"
+              id="telNumber"
+              name="telNumber"
+              placeholder="Phone number"
+              value={formData.telNumber}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="file">File</label>
+            <input
+              type="file"
+              id="file"
+              onChange={handleFileChange}
+              required
+            />
+          </div>
+          <button type="submit" className="submit-btn">Create Post</button>
+        </form>
 
-      {successMessage && <p className="success">{successMessage}</p>}
-      {errorMessage && <p className="error">{errorMessage}</p>}
+        {successMessage && <p className="success-message">{successMessage}</p>}
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+      </div>
       <Footers />
     </div>
   );

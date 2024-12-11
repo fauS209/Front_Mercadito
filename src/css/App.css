@@ -16,7 +16,13 @@
   align-items: center;
   padding: 20px;
   font-family: Arial, sans-serif;
-  max-width: 100%;
+  max-width: 100%;  
+ 
+}
+
+.body-App{
+  background-image: url("/public/images/supermercado-tienda-pasillo-interior-abstracto-fondo-borroso_293060-10503.avif");
+  
 }
 
 .card {
@@ -45,10 +51,11 @@
 }
 
 .card-text {
-  background-color: rgb(229, 229, 229);
+  background-color: rgb(221, 215, 215);
   font-size: 1rem;
   color: rgb(0, 0, 0);
-  border-radius: 25px;
+  
+  border-radius: 15px;
   border-style: ridge;
   border-color: rgb(187, 191, 191);
 

@@ -9,15 +9,14 @@ const Dashbord = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchTerm, setSearchTerm] = useState(""); // Estado para el término de búsqueda
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
-  // Función para obtener los posts
   const fetchPosts = async (filter = "") => {
     try {
       const url = filter
         ? `http://localhost:8080/api/v1/mercadito/posts/filter/${filter}`
-        : "http://localhost:8080/api/v1/mercadito/posts/all"; // URL de filtrado o todos los posts
+        : "http://localhost:8080/api/v1/mercadito/posts/all";
       const response = await axios.get(url);
       setPosts(response.data);
     } catch (err) {
@@ -29,22 +28,27 @@ const Dashbord = () => {
   };
 
   useEffect(() => {
-    // Validación de autenticación
+    document.body.classList.add("body-Dashbord");
+    return () => {
+      document.body.classList.remove("body-Dashbord");
+    };
+  }, []);
+
+  useEffect(() => {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
     if (isLoggedIn !== "true") {
-      navigate("/Error"); // Redirige si no está autenticado
+      navigate("/Error");
       return;
     }
 
-    fetchPosts(); // Obtiene todos los posts al inicio
+    fetchPosts();
   }, [navigate]);
 
-  // Función que maneja el envío del formulario de búsqueda
   const handleFilterSubmit = (e) => {
     e.preventDefault();
-    setLoading(true); // Activar el estado de carga
-    const filter = searchTerm.trim(); // Asegúrate de eliminar espacios en blanco
-    fetchPosts(filter); // Filtra los posts según el nombre del producto
+    setLoading(true);
+    const filter = searchTerm.trim();
+    fetchPosts(filter);
   };
 
   if (loading) return <p>Cargando posts...</p>;
@@ -53,15 +57,13 @@ const Dashbord = () => {
   return (
     <div>
       <Navbar />
-      <h1>El Mercadito Trigreño</h1>
-      
-      {/* Formulario de filtro */}
+      <h1 className="titleMercadito">El Mercadito Trigreño</h1>
       <form onSubmit={handleFilterSubmit} className="filter-form">
         <input
           type="text"
           placeholder="Search by product name"
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)} // Actualiza el estado con el valor ingresado
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
         <button type="submit">Filtrar</button>
       </form>
@@ -84,7 +86,7 @@ const Dashbord = () => {
               <strong>Fecha:</strong> {post.date}
             </p>
             <a
-              href={`https://wa.me/506${post.telNumber}`}
+              href={`https://wa.me/506${post.telNumber}?text=Hola!%20Estoy%20interesado%20en%20el%20producto%20"${post.title}"`}
               className="whatsapp-button"
               target="_blank"
               rel="noopener noreferrer"

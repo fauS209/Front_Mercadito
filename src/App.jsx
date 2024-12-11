@@ -18,14 +18,14 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div className="all-conatiner">
       <div className="app-container">
         <Navbar />
         <div className="card">
           <div className="card-body">
             <h1 className="card-title1">El Mercadito Tigreño</h1>
             <img
-              src="/src/assets/logoMercadito.png"
+              src="https://i.ibb.co/LvD3P41/logo-Mercadito.png"
               alt="logo"
               className="logo-mercadito"
             />
@@ -45,7 +45,7 @@ function App() {
           <Footers />
         </footer>
       </div>
-    </>
+    </div>
   );
 }
 
