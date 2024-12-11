@@ -84,7 +84,7 @@ const Dashbord = () => {
               <strong>Fecha:</strong> {post.date}
             </p>
             <a
-              href={`https://wa.me/${post.telNumber}`}
+              href={`https://wa.me/506${post.telNumber}`}
               className="whatsapp-button"
               target="_blank"
               rel="noopener noreferrer"
